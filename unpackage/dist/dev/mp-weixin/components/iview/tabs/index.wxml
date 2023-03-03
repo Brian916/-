@@ -1,0 +1,1 @@
+<view class="_div data-v-122b8d46"><block wx:if="{{scroll}}"><scroll-view class="{{['i-tabs','i-tabs-scroll','data-v-122b8d46',classObj]}}" scroll-x="true"><slot></slot></scroll-view></block><block wx:else><view class="i-tabs _div data-v-122b8d46"><slot></slot></view></block></view>

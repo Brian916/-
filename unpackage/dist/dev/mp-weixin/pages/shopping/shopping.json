@@ -1,0 +1,7 @@
+{
+  "navigationBarTitleText": "商城",
+  "enablePullDownRefresh": false,
+  "usingComponents": {
+    "no-message": "/components/no-message/no-message"
+  }
+}

@@ -1,0 +1,64 @@
+{
+  "pages": [
+    "pages/index/index",
+    "pages/order/order",
+    "pages/order/addOrder",
+    "pages/me/me",
+    "pages/order/address",
+    "pages/order/add-address",
+    "pages/order/search-address",
+    "pages/shopping/shopping",
+    "pages/me/login",
+    "pages/shopping/shopping-info",
+    "pages/shopping/shopping-order",
+    "pages/shopping/order"
+  ],
+  "subPackages": [],
+  "window": {
+    "backgroundTextStyle": "light",
+    "navigationBarBackgroundColor": "#31b977",
+    "navigationBarTextStyle": "white",
+    "onReachBottomDistance": 50,
+    "navigationBarTitleText": "uni-app",
+    "backgroundColor": "#F8F8F8"
+  },
+  "tabBar": {
+    "color": "#C6C6C6",
+    "selectedColor": "#31b977",
+    "borderStyle": "white",
+    "backgroundColor": "#ffffff",
+    "list": [
+      {
+        "text": "首页",
+        "pagePath": "pages/index/index",
+        "iconPath": "/static/images/tabBar_icon01.png",
+        "selectedIconPath": "/static/images/tabBar_icon01_active.png"
+      },
+      {
+        "text": "订单",
+        "pagePath": "pages/order/order",
+        "iconPath": "/static/images/tabBar_icon02.png",
+        "selectedIconPath": "/static/images/tabBar_icon02_active.png"
+      },
+      {
+        "text": "商城",
+        "pagePath": "pages/shopping/shopping",
+        "iconPath": "/static/images/tabBar_icon04.png",
+        "selectedIconPath": "/static/images/tabBar_icon04_active.png"
+      },
+      {
+        "text": "我的",
+        "pagePath": "pages/me/me",
+        "iconPath": "/static/images/tabBar_icon03.png",
+        "selectedIconPath": "/static/images/tabBar_icon03_active.png"
+      }
+    ]
+  },
+  "permission": {
+    "scope.userLocation": {
+      "desc": "需要您授权使用位置信息"
+    }
+  },
+  "usingComponents": {},
+  "sitemapLocation": "sitemap.json"
+}

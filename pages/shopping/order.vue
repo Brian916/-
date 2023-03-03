@@ -1,0 +1,573 @@
+<template>
+	<view class="page">
+		<view class="message" >
+			<!-- itab -->
+			<view class="message-tabs">
+				<i-tabs v-model="current"  @change="tabChange">
+					<i-tab  item-key="1" title="待发货"></i-tab>
+					<i-tab  item-key="2" title="已完成"></i-tab>
+					<!-- <i-tab  item-key="3" title="提醒"></i-tab> -->
+				</i-tabs>
+			</view>
+		</view>
+		<scroll-view class="message-content" :scroll-y="true" @scrolltolower="onScrolltolower">
+			<view v-if="current =='1'">
+				<view class="message-card" @click="toView(item)" :key="index" v-for="(item, index) in todoList">
+					<!-- <view class="message-card-left">
+						{{item.createUserName}}
+					</view> -->
+					<view class="message-card-topRight">
+						{{getState(item.status)}}
+					</view>
+					<view class="message-card-right" >
+						<view class="message-card-right-arrow"></view>
+						
+						<view class="message-card-right-title">
+							<view class="message-card-right-title-left">
+								兑换物品:
+							</view>
+							<view class="message-card-right-title-right" style="flex:2">
+								{{item.goodsName}}
+							</view>
+						</view>
+						<view class="message-card-right-title">
+							<view class="message-card-right-title-left">
+								兑换数量:
+							</view>
+							<view class="message-card-right-title-right" style="flex:2">
+								{{item.goodsNum}}
+							</view>
+						</view>
+						<view class="message-card-right-title">
+							<view class="message-card-right-title-left">
+								兑换时间:
+							</view>
+							<view class="message-card-right-title-right" style="flex:2">
+								{{item.createTimeStr}}
+							</view>
+						</view>
+						<view class="message-card-right-title">
+							<view class="message-card-right-title-left">
+								兑换积分:
+							</view>
+							<view class="message-card-right-title-right" style="flex:2">
+								{{item.score}}
+							</view>
+						</view>
+						<view class="message-card-right-title" v-if="item.status>0">
+							<view class="message-card-right-title-left">
+								快递名称:
+							</view>
+							<view class="message-card-right-title-right" style="flex:2">
+								{{item.expressName}}
+							</view>
+						</view>
+						<view class="message-card-right-title" v-if="item.status>0">
+							<view class="message-card-right-title-left">
+								快递单号:
+							</view>
+							<view class="message-card-right-title-right" style="flex:2">
+								{{item.expressOrderNo}}
+							</view>
+						</view>
+					   <view class="message-card-right-btns" >
+							<view class="message-card-right-btns-reject" v-if="item.status==0" @click.stop="reback(item)"><view class="message-card-right-btns-reject-btn">取消</view></view>
+							<view class="message-card-right-btns-agree" v-if="item.status==1" @click.stop="agree3(item)"><view class="message-card-right-btns-agree-btn">签收</view></view>
+						</view>
+					</view>
+				</view>
+				<uni-load-more v-if="todoList.length" :status="status" />
+			</view>
+			<view v-if="current == '2'">
+				<view class="message-card" @click="toView2(item)" :key="index" v-for="(item, index) in todoList">
+					<view class="message-card-topRight" :style="{'background':item.status==2||item.status==4?'#31b977':'#F0AD4E'}">
+						{{getState(item.status)}}
+					</view>
+					<view class="message-card-right" >
+						<view class="message-card-right-arrow"></view>
+						
+						<view class="message-card-right-title">
+							<view class="message-card-right-title-left">
+								兑换物品:
+							</view>
+							<view class="message-card-right-title-right" style="flex:2">
+								{{item.goodsName}}
+							</view>
+						</view>
+						<view class="message-card-right-title">
+							<view class="message-card-right-title-left">
+								兑换数量:
+							</view>
+							<view class="message-card-right-title-right" style="flex:2">
+								{{item.goodsNum}}
+							</view>
+						</view>
+						<view class="message-card-right-title">
+							<view class="message-card-right-title-left">
+								兑换时间:
+							</view>
+							<view class="message-card-right-title-right" style="flex:2">
+								{{item.createTimeStr}}
+							</view>
+						</view>
+						<view class="message-card-right-title">
+							<view class="message-card-right-title-left">
+								兑换积分:
+							</view>
+							<view class="message-card-right-title-right" style="flex:2">
+								{{item.score}}
+							</view>
+						</view>
+						<view class="message-card-right-title" v-if="item.status>0&&item.status!=3">
+							<view class="message-card-right-title-left">
+								快递名称:
+							</view>
+							<view class="message-card-right-title-right" style="flex:2">
+								{{item.expressName}}
+							</view>
+						</view>
+						<view class="message-card-right-title" v-if="item.status>0&&item.status!=3">
+							<view class="message-card-right-title-left">
+								快递单号:
+							</view>
+							<view class="message-card-right-title-right" style="flex:2">
+								{{item.expressOrderNo}}
+							</view>
+						</view>
+					</view>
+				</view>
+				<uni-load-more v-if="todoList.length" :status="status" />
+			</view>
+			
+			<no-message :isShowNodata="isShowNodata"  :list="todoList" />
+		     <neil-modal :show="showModal" title="请完善订单" @cancel="bindBtn('cancel')" @confirm="bindBtn('confirm')">
+				 <view class="input-view">
+					 <view class="input-name" style="padding:20upx 30upx;display:flex;font-size: 28upx;"> 
+						 <view>实际价格</view>
+						 <input type="text" v-model="actualPrice" style="margin-left: 20upx;" placeholder="请输入实际价格" />
+					 </view>
+					 <view class="input-password"  style="padding:20upx 30upx;display:flex;font-size: 28upx;">
+						 <view>实际重量</view>
+						 <input type="text" v-model="actualWeight" style="margin-left: 20upx;"  placeholder="请输入实际重量" />
+					 </view>
+				 </view>
+		     </neil-modal>
+		</scroll-view>
+	</view>
+</template>
+
+<script>
+	import noMessage from '@/components/no-message/no-message.vue'
+	import iTabs from '@/components/iview/tabs/index'
+	import iTab from '@/components/iview/tab/index'
+	import uniLoadMore from '@/components/uni-load-more/uni-load-more.vue'
+	import neilModal from '@/components/neil-modal/neil-modal.vue';
+	import {getMyGoodsExchangeInfo,confirmedGoodByChangeId,cannelExchangeByChangeId} from"@/api/order.js"
+	export default {
+	    components: {
+			iTabs,
+			iTab,
+			uniLoadMore,
+			noMessage,
+			neilModal
+		},
+		data() {
+			return {
+				isShowNodata: false,
+				current: '1',
+				todoList:[],
+				userInfo:{},
+				showModal:false,
+				page:0,
+				row:10,
+				queryConditions:[{
+				  queryConditions:"",//查询字段名,处理人
+				  operation:"",//比较符
+				  queryValue:"" //比较值
+				}],
+				userType:4, //userType:1 是超级管理，2是管理员 3:是员工 4：客户
+                actualPrice:"",//实际价格
+				actualWeight:"", //实际重量
+				orderGoodsInfo:{}
+			}
+		},
+		computed: {
+			isMore() {
+				/* if (this.page.current >= this.page.pages) {
+					return false;
+				} else {
+					return true;
+				} */
+				return false;
+			},
+			status() {
+				if (this.isLoading) {
+					return 'loading'
+				} else {
+					return this.isMore ? 'more' : 'noMore'
+				}
+			}
+		},
+		onShow() {
+			this.userInfo=getApp().globalData.userInfo
+			if(JSON.stringify(this.userInfo)=='{}'){
+			   uni.navigateTo({
+			   	url:"../me/login"
+			   })
+			}else{
+				this.userType=this.userInfo.userType;
+			}
+			this.initPage()
+			this.searchInfo()
+     	},
+		onReachBottom() {
+			this.onScrolltolower()
+		},
+		methods: {
+			getState(state){
+				switch(state){
+					case 0: return "已下单";
+					break;
+					case 1: return "已发货";
+					break;
+					case 2: return "确定收货";
+					break;
+					case 3: return "已取消";
+					break;
+					case 4: return "已自动收货";
+					break;
+				}
+			},
+			tabChange() {
+				this.todoList = []
+				if (this.current == '1') {
+					// 去请求数据
+					this.initPage()
+					this.searchInfo()
+				}
+				else if (this.current == '2') {
+					this.initPage()
+					this.searchInfo()
+				}
+			},
+			searchInfo() {
+
+				this.isShowNodata = false
+				// 根据当前的current 来加载不同的function
+				if (this.current == '1') {
+					uni.showLoading();
+					let data={
+						page:0,
+						rows:10,
+						status:"1",
+					}
+					getMyGoodsExchangeInfo(data).then(res => {
+						this.todoList=[];
+						this.isShowNodata = true
+						if (res) {
+							this.todoList = this.todoList.concat(res.rows);
+							uni.hideLoading();
+						}
+					}, () => {
+						this.isShowNodata = true
+						uni.hideLoading();
+					})
+				} else if (this.current == '2') {
+					uni.showLoading();
+					let data={
+						page:0,
+						rows:10,
+						status:"0",
+					}
+					getMyGoodsExchangeInfo(data).then(res => {
+						this.isShowNodata = true
+						this.todoList=[];
+						if (res) {
+							this.todoList = this.todoList.concat(res.rows);
+							uni.hideLoading();
+						}
+					}, () => {
+						uni.hideLoading();
+						this.isShowNodata = true
+					})
+				} 
+			},
+			initPage() {
+				this.todoList = [];
+				this.page=0;
+				this.row=100;
+			},
+			onScrolltolower() {
+				if (!this.isMore) return;
+				this.searchInfo()
+			},
+			toView2(item) {
+				const id = item.id;
+				return false;
+			},
+			// 跳转到新页面
+			toView(item) {
+				return false;
+			},
+			
+			bindBtn(type) {
+				/* uni.showToast({
+					title: `点击了${type==='cancel'?'取消':'确定'}按钮`,
+					icon: 'none'
+				}) */
+				let self=this;
+				self.showModal=false;
+				if(type==='confirm'){
+					let data={
+						id:self.orderGoodsInfo.id,
+						actualPrice:self.actualPrice,
+						actualWeight:self.actualWeight
+					}
+					if(!self.actualPrice){
+						self.$api.msg("请输入实际价格");
+						return false
+					}
+					if(!self.actualWeight){
+						self.$api.msg("请输入实际重量");
+						return false
+					}
+					updateOrderDetail(data).then(res=>{
+						if(res.returnCode=="0"){
+							
+							self.initPage()
+							self.searchInfo()
+						}
+					})
+				}
+			},
+			openModal(item){
+				this.showModal=true;
+				this.orderGoodsInfo=item;
+			},
+			//客户撤回
+			reback(item){
+				let self=this;
+				uni.showModal({
+					title: '撤回兑换',
+					    content: '确定撤回兑换',
+						showCancel:false,
+					    success: function (res) {
+						if (res.confirm) {
+							cannelExchangeByChangeId(item.id).then(res=>{
+								if(res.returnCode=="0"){
+									self.initPage()
+									self.searchInfo()
+								}
+							})
+						}
+					}
+				})
+			},
+		
+			//客户确认收获
+			agree3(item){
+				let self=this;
+				confirmedGoodByChangeId(item.id).then(res=>{
+					if(res.returnCode=="0"){
+						self.initPage()
+						self.searchInfo()
+					}
+				})
+			}
+
+		}
+	}
+</script>
+<style lang="scss" scoped>
+	@import '@/components/iview/mixin.scss';
+	.page {
+		height: 100%;
+
+		.message {
+			width: 100%;
+			box-shadow: 0px 2upx 16upx 0px rgba(0, 0, 0, 0.06);
+
+			&-title {
+
+				padding-left: 30upx;
+				padding-right: 30upx;
+
+				&-span {
+					height: 70upx;
+					font-size: 50upx;
+					font-family: PingFangSC-Medium, PingFang SC;
+					font-weight: 600;
+					color: rgba(34, 34, 34, 1);
+					line-height: 70upx;
+				}
+			}
+			&-tabs{
+				margin-top: 8upx;
+			}
+
+			&-tab {
+				padding-left: 30upx;
+				padding-right: 30upx;
+				display: flex;
+				&-item {
+					&-badge {}
+				}
+			}
+		}
+		.message-content {
+			height:calc(100% - 280rpx);
+			overflow-y: scroll;
+			.message-card {
+				display: flex;
+				margin: 30upx 30upx 0;
+				position: relative;
+				&-topRight{
+					position: absolute;
+					right:20upx;
+					top:30upx;
+					width: 136upx;
+					background: #F0AD4E;
+					color: #FFFFFF;
+					height: 36upx;
+					line-height: 36upx;
+					font-size: 26upx;
+					text-align: center;
+					border-radius: 12upx;
+				}
+
+				&-left {
+					width: 70upx;
+					height: 70upx;
+					font-size: 32upx;
+					display: inline-block;
+					text-align: center;
+					line-height: 70upx;
+					border-radius: 50%;
+					color: white;
+					background: rgba(74, 134, 236, 1);
+				}
+
+				&-right {
+					flex: 1;
+					position: relative;
+					padding: 22upx 22upx;
+					border: 2upx solid #E3E7EB;
+					border-radius: 12upx;
+					margin-left: 20upx;
+					&-arrow {
+						position: absolute;
+						width: 18upx;
+						height: 39upx;
+						left: -18upx;
+						top: 60upx;
+						z-index: 111;
+						background-size: 100% 100%;
+						
+					}
+					&-content {
+						font-size: 30upx;
+						font-family: PingFangSC-Regular, PingFang SC;
+						font-weight: 400;
+						color: rgba(34, 34, 34, 1);
+						line-height: 42upx;
+						display: flex;
+						text-align: center;
+						padding: 14upx 10upx 0px;
+						&-item{
+							flex:1;
+						}
+					}
+
+					&-btns {
+						display: flex;
+						position: relative;
+						margin-top: 20upx;
+						font-size: 32upx;
+						font-weight: 400;
+						color: rgba(34, 34, 34, 1);
+						line-height: 60upx;
+						padding-top: 15upx;
+						padding-left: 20upx;
+						padding-right: 20upx;
+						&:after {
+							@include hairline();
+							border-top-width: 1px;
+						}
+
+						&-divider {
+							width: 1upx;
+							background: #E3E7EB;
+							height: 48upx;
+						}
+
+						&-reject {
+							flex: 1;
+							display: flex;
+							justify-content:center;
+							&-btn{
+								width: 200upx;
+								background: #FF4259;
+								border-radius: 10upx;
+								color: #FFFFFF;
+								text-align: center;
+							}
+							
+						}
+
+						&-agree {
+							flex: 1;
+							display: flex;
+							justify-content:center;
+							&-btn{
+								width: 200upx;
+								background: #31b977;
+								border-radius: 10upx;
+								color: #FFFFFF;
+								text-align: center;
+							}
+						}
+					}
+
+					&-info {
+						font-size: 28upx;
+						font-weight: 400;
+						color: rgba(153, 153, 153, 1);
+						line-height: 40upx;
+
+						&-time {
+							display: inline-block;
+							font-size: 28upx;
+							font-weight: 400;
+							color: rgba(34, 34, 34, 1);
+						}
+					}
+
+					&-title {
+						display: flex;
+
+						// justify-content: space-between;
+						align-items: center;
+
+						&-left {
+							font-size: 34upx;
+							font-weight: 400;
+							color: #222222;
+							flex: 1;
+
+							span {
+								color: #4A86EC;
+							}
+						}
+
+						&-right {
+							font-size: 32upx;
+							font-weight: 400;
+							color: rgba(153, 153, 153, 1);
+						}
+					}
+				}
+			}
+		}
+
+	}
+</style>

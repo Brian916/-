@@ -1,0 +1,1 @@
+<block wx:if="{{computerIsShow}}"><view class="no-data"><image src="/static/images/nodata.png"></image><view class="no-data-title">暂无消息</view></view></block>

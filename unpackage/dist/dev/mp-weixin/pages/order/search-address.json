@@ -1,0 +1,6 @@
+{
+  "navigationBarTitleText": "搜寻地址",
+  "navigationStyle": "custom",
+  "enablePullDownRefresh": false,
+  "usingComponents": {}
+}

@@ -1,0 +1,25 @@
+
+.logo{
+	  width: 180rpx;
+	  height: 180rpx;
+	  margin: 0 auto;
+	  margin-top: 260rpx;
+}
+.logo image{
+	  width: 100%;
+	  height: 100%;
+}
+.logo-txt{
+  	  margin:  0 auto;
+  	  font-size: 50rpx;
+  	  font-weight: 800;
+  	  text-align: center;
+  	  color: #267426;
+  	  margin-top: 40rpx;
+}
+.login{
+	  margin:40rpx 30rpx;
+	  background: #267426;
+	  border-radius: 20rpx;
+}
+

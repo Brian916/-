@@ -1,0 +1,58 @@
+
+page{
+	background: #F5F5F5;
+}
+.content{
+	overflow-y:auto;
+}
+.address{
+	margin: 30rpx 30rpx;
+	background: #FFFFFF;
+	padding: 30rpx 20rpx 20rpx;
+	border-radius: 20rpx;
+}
+.address-title{
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	color: #222222;
+	font-size: 36rpx;
+	font-weight: 600;
+}
+.address-default{
+	background: #ED3F14;
+	border-radius: 28rpx;
+	padding: 3rpx 15rpx;
+	font-size: 28rpx;
+	font-weight: 500;
+	color: #FFFFFF;
+}
+.address-content{
+	margin-top: 40rpx;
+	margin-bottom: 20rpx;
+	color: #9B9B9B;
+	font-size: 32rpx;
+	font-weight: 500;
+}
+.address-menu{
+	border-top: solid 1px #ECECEC;
+	display: flex;
+	padding-top:10rpx;
+}
+.addres-menu-item{
+	flex:1;
+	text-align: center;
+	color: #B2B2B2;
+	font-size: 36rpx;
+}
+.placeholder-view{
+	width: 100%;
+	height: 150rpx;
+}
+.btn{
+	position:fixed;
+	bottom: 40rpx;
+	left:30rpx;
+	width: calc(100% - 60rpx);
+}
+
