@@ -28,15 +28,18 @@
 												};
 												getWeiOpenId(data).then(res => {
 													if(res.returnCode=="0"){
+														console.info(res.result)
 														let data={
-															username:res.result.openId,
-															//username:getApp().globalData.wUserInfo.nickName,
+															username:res.result,
+															// username:getApp().globalData.wUserInfo.nickName,
 															password:"123456"
 														}
 														fakeLogin(data).then(res=>{
 															if(res.returnCode=="0"){
 																getApp().globalData.userInfo=res.result
 																uni.setStorageSync("UserInfo",true)
+																uni.setStorageSync('token', res.result.token)
+																uni.setStorageSync('userId', res.result.userId)
 															}
 														})
 													} 
@@ -71,5 +74,5 @@
 </script>
 
 <style>
-
+@import url("/static/css/base.css");
 </style>

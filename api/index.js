@@ -120,7 +120,7 @@ export function deleteUserAddress(data) {
    * */
 export function myUserAddress(data) {
   return request({
-    url: '/hsOrderInf/myUserAddress',
+    url: '/hsOrderInf/myUserAddress?userId='+data,
     method: 'get',
     data
   })
@@ -241,11 +241,38 @@ export function confiremedPaidOrderById(data) {
   })
 }
 
+/**
+ * 根据照片识别
+   * */
+export function upload(data) {
+  return request({
+    url: '/upload',
+    method: 'get',
+    data
+  })
+}
 
+/**
+ * 根据识别的结果返回想要的数据
+   * */
+export function img(data) {
+  return request({
+    url: '/img',
+    method: 'get',
+    data
+  })
+}
 
-
-
-
+/**
+ * 获取资讯列表
+   * */
+export function getList(data) {
+  return request({
+    url: '/news/get',
+    method: 'get',
+    data
+  })
+}
 
 
 

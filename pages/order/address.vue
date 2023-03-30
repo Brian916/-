@@ -108,7 +108,9 @@
 				
 			},
 			myUserAddress(){
-				myUserAddress().then(res=>{
+				let userId = getApp().globalData.userInfo;
+				console.log(userId)
+				myUserAddress(userId).then(res=>{
 					if(res.returnCode=="0"){
 						this.list=res.result
 					}

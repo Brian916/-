@@ -79,7 +79,8 @@
 					latitude:"",
 					locationAddress:"",//地图定位获得的地址
 					addressDetail:"",//手动填写的地址
-					districtCode:""
+					districtCode:"",
+					userId:""
 				},
 				items:[{value:1,name:"男士"},{value:2,name:"女士"}]
 			}
@@ -116,6 +117,9 @@
 				this.model.sex = evt.detail.value;
 			},
 			addUserAddress(){
+				this.model.userId = getApp().globalData.userInfo;
+				console.info(this.model.userId)
+				
 			    let data=this.model
 				if(data.id&&data.id!=""){
 					this.updateUserAddress();

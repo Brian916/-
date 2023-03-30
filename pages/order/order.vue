@@ -4,7 +4,7 @@
 			
 			<!-- itab -->
 			<view class="message-tabs">
-				<i-tabs v-model="current"  @change="tabChange">
+				<i-tabs v-model="current" @change="tabChange">
 					<i-tab  item-key="1" title="待办理"></i-tab>
 					<i-tab  item-key="2" title="已完成"></i-tab>
 					<!-- <i-tab  item-key="3" title="提醒"></i-tab> -->
@@ -25,7 +25,7 @@
 						
 						<view class="message-card-right-title">
 							<view class="message-card-right-title-left">
-								预约日期:
+								下单时间:
 							</view>
 							<view class="message-card-right-title-right" style="flex:2">
 								{{item.appointDate}}
@@ -44,7 +44,7 @@
 								预约重量:
 							</view>
 							<view class="message-card-right-title-right" style="flex:2">
-								{{item.orderDetails[0].estimateWeight}}
+								{{item.details[0].estimateWeight}}
 							</view>
 						</view>
 						<view class="message-card-right-title">
@@ -107,7 +107,7 @@
 						
 						<view class="message-card-right-title">
 							<view class="message-card-right-title-left">
-								预约日期:
+								下单时间:
 							</view>
 							<view class="message-card-right-title-right" style="flex:2">
 								{{item.appointDate}}
@@ -126,7 +126,7 @@
 								预约重量:
 							</view>
 							<view class="message-card-right-title-right" style="flex:2">
-								{{item.orderDetails[0].estimateWeight}}
+								{{item.details[0].estimateWeight}}
 							</view>
 						</view>
 						<view class="message-card-right-title">
@@ -245,6 +245,9 @@
 		onReachBottom() {
 			this.onScrolltolower()
 		},
+    onLoad(e){
+      this.current = (+e.id + 1).toString()
+    },
 		methods: {
 			getState(state){
 				switch(state){
@@ -275,7 +278,9 @@
 				this.isShowNodata = false
 				// 根据当前的current 来加载不同的function
 				if (this.current == '1') {
+					// 打开加载状态
 					uni.showLoading();
+
 					let data=this.userType=="3"?{
 						page:0,
 						row:10,
@@ -298,13 +303,18 @@
 					getHsOrderList(data).then(res => {
 						this.todoList=[];
 						this.isShowNodata = true
+						// 关闭加载状态
+						uni.hideLoading();
+
 						if (res) {
 							this.todoList = this.todoList.concat(res.rows);
-							uni.hideLoading();
+							console.log("1")
 						}
-					}, () => {
+						// 这里建议用catch
+					}).catch(error => {
 						this.isShowNodata = true
 						uni.hideLoading();
+						console.log("2")
 					})
 				} else if (this.current == '2') {
 					uni.showLoading();
@@ -329,9 +339,9 @@
 					getHsOrderListFinish(data).then(res => {
 						this.isShowNodata = true
 						this.todoList=[];
+						uni.hideLoading();
 						if (res) {
 							this.todoList = this.todoList.concat(res.rows);
-							uni.hideLoading();
 						}
 					}, () => {
 						uni.hideLoading();

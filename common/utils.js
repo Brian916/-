@@ -1,7 +1,8 @@
 //现网正式环境
-const BASEURL = "https://www.mazsn.cn/mazsnexample"
+// const BASEURL = "http://lonely.icu:8080"
+const BASEURL = "http://47.120.7.6"
 const BASEURLImg = "http://www.mazsn.cn"
-//const BASEURL = "http://121.4.58.57:8080/mazsnexample"
+
 /**
  * 时间戳返回 时:分:秒 \
  * */

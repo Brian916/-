@@ -26,7 +26,8 @@ const request = (config) => {
 				if (res.statusCode == 200) {
 					console.log("res",res)
 					if (res.header.token) {
-						uni.setStorageSync('token', res.header.token)
+						uni.setStorageSync('token', res.header.Token)
+						console.log("token:",res.header.Token)
 					}
 					if(res.cookies.length>0){
 						uni.setStorageSync('cookie', res.cookies[0])

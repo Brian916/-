@@ -3,7 +3,7 @@
 		<view class="hspl">
 			<view class="hspl-title">回收品类</view>
 			<view class="hspl-content">
-				<view class="hspl-content-item" v-for="(item,index) in typeList" :key="index" :class="[type==item.sort?'select':'']" @click="changeType(item.sort,item.num)">
+				<view class="hspl-content-item" v-for="(item,index) in typeList" :key="index" :class="[type==item.sort?'select':'']" @click="changeType(index+1, index+1)">
 					<image :src="item.img"></image>
 				</view>
 				<!-- <view class="hspl-content-item" :class="[type=='2'?'select':'']" @click="changeType('2')">
@@ -82,14 +82,14 @@
 				<view class="ygzl-content-item" :class="[weight=='2'?'select':'']" @click="changeWeight('2')">50-100公斤</view>
 				<view class="ygzl-content-item" :class="[weight=='3'?'select':'']" @click="changeWeight('3')">100公斤以上</view>
 			</view>
-			<view class="ygzl-mark" v-if="weight!='3'"> 
+			<!-- <view class="ygzl-mark" v-if="weight!='3'"> 
 				<view>未满100公斤，不需要添加照片</view>
 				<view class="ygzl-mark-btn"  @click="addGoods()">+添加品类</view>
 			</view>
 			<view class="ygzl-mark" v-if="weight=='3'">
 			    <view>超过100公斤，请添加回收物照片</view>	
 				<view class="ygzl-mark-btn" @click="addGoods()">+添加品类</view>
-			</view>
+			</view> -->
 			<view class="ygzl-file"  v-if="weight=='3'">
 				<file-upload
 					 :imageLength="imageLength"
@@ -148,7 +148,7 @@
 			<view class="subscribe-view" style="height: 200upx;">
 			  <view class="subscribe-view-left" style="height: 200upx;width: 200upx; line-height: 200upx;"> 预约地址 </view>
 			  <view class="subscribe-view-right  isselect" style="height: 200upx;">
-			   
+			    <picker>
 			      <view class="uni-input" style="height: 200upx;line-height: initial;
     display: flex;
     align-items: center;
@@ -196,7 +196,8 @@
 	import { BASEURL } from '@/common/utils.js'
 	import FileUpload from "@/components/file-upload/file-upload.vue"
 	import neilModal from '@/components/neil-modal/neil-modal.vue';
-	import {getHsTypeZtree,getHsTypeList,addHsOrder,uploadOrderImg,myUserAddress} from"@/api/index.js"
+import moment from 'moment'
+	import {getHsTypeZtree,getHsTypeList,addHsOrder,uploadOrderImg,myUserAddress, logout} from"@/api/index.js"
 	export default {
 		components:{
 			FileUpload,
@@ -238,6 +239,7 @@
 			this.myUserAddress()
 		},
 		onShow(){
+			console.log(moment().format('YYYY-MM-DD HH:mm:ss'));
 			let userInfo=getApp().globalData.userInfo
 			if(JSON.stringify(userInfo)=='{}'){
 			   uni.navigateTo({
@@ -285,6 +287,7 @@
 			openModal(item){
 				this.showModal=true;
 			},
+			// 获取样式列表吗？ 这是拿的静态资源图片吧 不是， 这个不就是请求的静态图片 不着
 			getHsTypeList(){
 				getHsTypeList().then(res=>{
 					this.ztreeList=res.rows
@@ -342,7 +345,7 @@
 						hasPhoto:this.atts.length>0?1:0,//0：无图片上传 1：有图片上传
 						detailPhotoUrls:this.atts
 					 }],
-					 appointDate:this.model.useDate+" "+"00:00:00",
+					 appointDate:moment().format('YYYY-MM-DD HH:mm:ss'),
 					 appointTime:this.model.useDate+" "+this.model.userTime+":00",
 					 addressId:this.model.addressId,
 					 publicGive:type	
@@ -467,7 +470,8 @@
 				})
 			},
 			myUserAddress(){
-				myUserAddress().then(res=>{
+				let userId = uni.getStorageSync('userId');
+				myUserAddress(userId).then(res=>{
 					if(res.returnCode=="0"){
 						this.listAddress=res.result
 						if(this.listAddress&&this.listAddress.length>0){

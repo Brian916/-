@@ -1,156 +1,153 @@
 
 .content {
-		height: auto;
+  height: auto;
 }
 .logo {
-		height: 300rpx;
-		width: calc(100% - 60rpx);
-		margin: 30rpx 30rpx;
-		margin-top: 20rpx;
+  height: 300rpx;
+  width: calc(100% - 60rpx);
+  margin: 20rpx 30rpx 0rpx 30rpx;
 }
-.static{
-		height: 200rpx;
-		width: calc(100% - 60rpx);
-		margin: 30rpx 30rpx;
-		background: white;
-		box-shadow: 0px 0px 20rpx 0px rgba(0, 0, 0, 0.1);
-		border-radius: 20rpx;
-		display: flex;
-		align-items: center;
-		justify-content: center;
+.static {
+  height: 200rpx;
+  width: calc(100% - 60rpx);
+  margin: 30rpx 30rpx;
+  background: white;
+  box-shadow: 0px 0px 20rpx 0px rgba(0, 0, 0, 0.1);
+  border-radius: 20rpx;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
-.static-item{
-		flex:1;
-		text-align: center;
+.static-item {
+  flex: 1;
+  text-align: center;
 }
-.static-item-type{
-		font-size: 36rpx;
-		color: #222222;
+.static-item-type {
+  font-size: 36rpx;
+  color: #222222;
 }
-.static-item-number{
-		margin-top: 40rpx;
-		font-size: 50rpx;
-		color: #31b977;
+.static-item-number {
+  margin-top: 40rpx;
+  font-size: 50rpx;
+  color: #31b977;
 }
-.page-section-spacing{
-		width: calc(100% - 60rpx);
-		margin: 30rpx 30rpx;
+.page-section-spacing {
+  width: calc(100% - 60rpx);
+  margin: 30rpx 30rpx;
 }
-.swiper{
-		height: 300rpx;
-		width: 100%;
+.swiper {
+  height: 300rpx;
+  width: 100%;
 }
-	/* swiper-item 里面的图片高度 */
-swiper-item image{
-		width: 100%;
-		height: 300rpx;
-		border-radius: 20rpx 20rpx 0 0;
+/* swiper-item 里面的图片高度 */
+swiper-item image {
+  width: 100%;
+  height: 300rpx;
+  border-radius: 20rpx 20rpx 0 0;
 }
-.order-class{
-		display: flex;
-		width: calc(100% - 60rpx);
-		margin: 30rpx 30rpx;
+.order-class {
+  display: flex;
+  width: calc(100% - 60rpx);
+  margin: 30rpx 30rpx;
 }
-.order-class-item{
-		height: 200rpx;
-		width: calc(50% - 4rpx);
+.order-class-item {
+  height: 200rpx;
+  width: calc(50% - 4rpx);
 }
-.order-class-item image{
-		width: 100%;
-		height: 200rpx;
-		border-radius: 14rpx;
+.order-class-item image {
+  width: 100%;
+  height: 200rpx;
+  border-radius: 14rpx;
 }
-.phone{
-		width: calc(100% - 60rpx);
-		margin: 30rpx 30rpx;
-		background-color: #F7F7F7;
-		border-radius: 20rpx 20rpx 20rpx 20rpx;
-		display: flex;
-		height: 140rpx;
-		align-items:center;
-		justify-content:space-between;
+.phone {
+  width: calc(100% - 60rpx);
+  margin: 30rpx 30rpx;
+  background-color: #f7f7f7;
+  border-radius: 20rpx 20rpx 20rpx 20rpx;
+  display: flex;
+  height: 140rpx;
+  align-items: center;
+  justify-content: space-between;
 }
-.phone-item{
-		font-size: 32rpx;
-		color: #222222;
+.phone-item {
+  font-size: 32rpx;
+  color: #222222;
 }
-.other{
-        width: calc(100% - 60rpx);
-		margin: 30rpx 30rpx 60rpx;
+.other {
+  width: calc(100% - 60rpx);
+  margin: 30rpx 30rpx 60rpx;
 }
-.other-title{
-		font-size: 40rpx;
-		color: #222222;
-		font-weight: 700;
+.other-title {
+  font-size: 40rpx;
+  color: #222222;
+  font-weight: 700;
 }
-.other-content{
-		margin-top: 60rpx;
-		display: flex;
-		align-items:center;
-		justify-content:center;
+.other-content {
+  margin-top: 60rpx;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
-.other-content-item{
-		flex: 1;
-		text-align: center;
+.other-content-item {
+  flex: 1;
+  text-align: center;
 }
-.other-content-item image{
-		width: 120rpx;
-		height: 100rpx;
+.other-content-item image {
+  width: 120rpx;
+  height: 100rpx;
 }
 .cu-reclaim {
-	    height: 220rpx;
-	    width: 220rpx;
-	    border-radius: 110rpx 110rpx 110rpx 110rpx;
-	    background-color: rgba(50,186,120,1);
-		position: absolute;
-		top: 20rpx;
-		left: 20rpx;
+  height: 220rpx;
+  width: 220rpx;
+  border-radius: 110rpx 110rpx 110rpx 110rpx;
+  background-color: rgba(50, 186, 120, 1);
+  position: absolute;
+  top: 20rpx;
+  left: 20rpx;
 }
 .cu-reclaims {
-	    background-color: rgba(50,186,120,0.5);
-	    height: 260rpx;
-	    width: 260rpx;
-	    border-radius: 130rpx 130rpx 130rpx 130rpx;
-		position: absolute;
-		top: 50rpx;
-		left: 50rpx;
+  background-color: rgba(50, 186, 120, 0.5);
+  height: 260rpx;
+  width: 260rpx;
+  border-radius: 130rpx 130rpx 130rpx 130rpx;
+  position: absolute;
+  top: 50rpx;
+  left: 50rpx;
 }
 .cu-reclaimss {
-	    background-color: rgba(50,186,120,0.3);
-	    height: 360rpx;
-	    width: 360rpx;
-		margin: 0 auto;
-		border-radius: 180rpx 180rpx 180rpx 180rpx;
-		position: relative;
-	    -webkit-animation: one-reclaim 0.6s infinite linear;
-	            animation: one-reclaim 0.6s infinite linear;
-	    -webkit-animation-direction: alternate;
-	            animation-direction: alternate;
+  background-color: rgba(50, 186, 120, 0.3);
+  height: 360rpx;
+  width: 360rpx;
+  margin: 0 auto;
+  border-radius: 180rpx 180rpx 180rpx 180rpx;
+  position: relative;
+  -webkit-animation: one-reclaim 0.6s infinite linear;
+          animation: one-reclaim 0.6s infinite linear;
+  -webkit-animation-direction: alternate;
+          animation-direction: alternate;
 }
 @-webkit-keyframes one-reclaim {
 0% {
-	        opacity: 0;
-	        -webkit-transform: scale(0.5);
-	                transform: scale(0.5);
+    opacity: 0;
+    -webkit-transform: scale(0.5);
+            transform: scale(0.5);
 }
 100% {
-	        opacity: 1;
-	        -webkit-transform: scale(1);
-	                transform: scale(1);
+    opacity: 1;
+    -webkit-transform: scale(1);
+            transform: scale(1);
 }
 }
 @keyframes one-reclaim {
 0% {
-	        opacity: 0;
-	        -webkit-transform: scale(0.5);
-	                transform: scale(0.5);
+    opacity: 0;
+    -webkit-transform: scale(0.5);
+            transform: scale(0.5);
 }
 100% {
-	        opacity: 1;
-	        -webkit-transform: scale(1);
-	                transform: scale(1);
+    opacity: 1;
+    -webkit-transform: scale(1);
+            transform: scale(1);
 }
 }
-	
-	
 

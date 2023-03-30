@@ -1,11 +1,8 @@
 <template>
 	<view>
 		<view class="logo">
-			<image src="/static/images/xiaoniu.png"></image>
+			<image src="/static/images/xiaosu.png"></image>
 		</view>
-<!-- 		<view class="logo-txt">
-			小牛换吧
-		</view> -->
 		<view class="login">
 		   <button type="primary" v-if="!isUser" style="background: #5AA28A;" open-type="getUserInfo" @getuserinfo="wxGetUserInfo">
 				微信登录
@@ -28,7 +25,6 @@
 					openId:""
 				},
 				isUser:false
-				
 			}
 		},
 		onLoad(){
@@ -59,7 +55,7 @@
 					username:self.wUserInfo.weiOpenId,
 					name:self.wUserInfo.nickName,
 					userType:4,//1：超级管理员 2：普通管理员 3：员工 4：客户
-					phone:"18255157968"
+					phone:"111111"
 				}
 				addWxUser(data).then(res=>{
 					if(res.returnCode=="0"||res.returnCode=="2"){
@@ -78,7 +74,8 @@
 						};
 						getWeiOpenId(data).then(res => {
 							if(res.returnCode=="0"){
-								self.wUserInfo.weiOpenId=res.result.openId;
+								// self.wUserInfo.weiOpenId=res.result.openId;
+								self.wUserInfo.weiOpenId=res.result;
 							} 
 						})
 					  }
@@ -94,8 +91,11 @@
 				}
 				fakeLogin(data).then(res=>{
 					if(res.returnCode=="0"){
-						getApp().globalData.userInfo=res.result
+						console.log("userInfo:" + getApp().globalData.userInfo);
 						uni.setStorageSync("UserInfo",true);
+						console.log("token:" + res)
+						uni.setStorageSync('token', res.result.token)
+						uni.setStorageSync('userId', res.result.userId)
 						uni.navigateBack({
 							delta:1
 						})

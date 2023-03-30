@@ -2,7 +2,7 @@ import dayjs from 'dayjs'
 
 const QQMapWX = require('@/common/qqmap-wx-jssdk.min.js')
 const qqmapsdk = new QQMapWX({
-  key: "2LWBZ-JUZ65-UMDI3-QWMQS-ZUGTZ-LVFIP"
+  key: "NTOBZ-CBXC5-JE5IX-QC7ML-AJDNS-RDFKB"
 })
 
 /**

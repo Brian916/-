@@ -9,7 +9,8 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "dayjs": "^1.9.4"
+    "dayjs": "^1.9.4",
+    "moment": "^2.29.4"
   },
   "standard": {
     "globals": {
