@@ -6,6 +6,7 @@
       </uni-search-bar>
     </uni-section>
     <view style="padding: 10px;" v-show="show">
+      <view v-show="list.img"><image style="width: 100%;height: 200px;" :src="list.img" @click="choose"></image></view>
       <view v-show="list.type">
         <view class="uni-box"><uni-title class="h4" type="h4" title="垃圾种类"></uni-title></view>
         <view>
@@ -53,12 +54,23 @@ export default {
   data() {
     return {
       type: ['可回收垃圾', '有害垃圾', '厨余垃圾', '其他垃圾'],
-      list: {},
-      show: false
+      list: {
+        img:'http://tmp/YDtPd6MrgUnF8c09d031c48d8d9714e8e32de07021db.jpg'
+      },
+      show: true
     };
   },
   methods: {
+    choose() {
+      console.log([this.list.img]);
+      var that = this
+      uni.previewImage({
+        current: 1,
+        urls: ['http://tmp/YDtPd6MrgUnF8c09d031c48d8d9714e8e32de07021db.jpg', 'http://tmp/YDtPd6MrgUnF8c09d031c48d8d9714e8e32de07021db.jpg']
+      });
+    },
     search(e) {
+      this.list = {};
       uni.request({
         url: 'https://apis.tianapi.com/lajifenlei/index', //仅为示例，并非真实接口地址。
         data: {
@@ -80,13 +92,15 @@ export default {
       console.log(e);
     },
     photograph() {
-      var that = this
+      this.list = {};
+      var that = this;
       uni.chooseImage({
         count: 1, //默认9
         success: function(res) {
           uni.showLoading({
             title: '加载中'
           });
+          that.list.img = res.tempFilePaths[0];
           uni.uploadFile({
             url: `${BASEURL}/upload`,
             filePath: res.tempFilePaths[0],
@@ -98,7 +112,10 @@ export default {
               var ress = JSON.parse(res.data);
               if (+ress.returnCode === 1) {
                 img({ imgUrl: ress.result }).then(res => {
-                  that.list = res
+                  that.list = {
+                    ...that.list,
+                    ...res
+                  };
                   that.show = true;
                   uni.hideLoading();
                 });
