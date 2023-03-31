@@ -237,6 +237,7 @@ import moment from 'moment'
 			this.type=e.type
 			this.getHsTypeList()
 			this.myUserAddress()
+			this.getHsGoodsList(1)
 		},
 		onShow(){
 			console.log(moment().format('YYYY-MM-DD HH:mm:ss'));
