@@ -153,7 +153,7 @@ export function getHsOrderList(data) {
    * */
 export function getHsOrderListFinish(data) {
   return request({
-    url: '/hsOrderInf/getHsOrderList?status=5',
+    url: '/hsOrderInf/getHsOrderList?status=3',
     method: 'post',
     data
   })

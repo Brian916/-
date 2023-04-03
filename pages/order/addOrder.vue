@@ -71,16 +71,16 @@
 				</view>
 				<view class="hsyq-content-item">
 					<image src="/static/images/dc10k.png"></image>
-					<view class="hsyq-content-item-remark">单次10kg起</view>
+					<view class="hsyq-content-item-remark">单次5kg起</view>
 				</view>
 			</view>
 		</view>
 	    <view class="ygzl">
 			<view class="ygzl-title">预估重量</view>
 			<view class="ygzl-content">
-				<view class="ygzl-content-item" :class="[weight=='1'?'select':'']" @click="changeWeight('1')">10-50公斤</view>
-				<view class="ygzl-content-item" :class="[weight=='2'?'select':'']" @click="changeWeight('2')">50-100公斤</view>
-				<view class="ygzl-content-item" :class="[weight=='3'?'select':'']" @click="changeWeight('3')">100公斤以上</view>
+				<view class="ygzl-content-item" :class="[weight=='1'?'select':'']" @click="changeWeight('1')">5-20公斤</view>
+				<view class="ygzl-content-item" :class="[weight=='2'?'select':'']" @click="changeWeight('2')">20-40公斤</view>
+				<view class="ygzl-content-item" :class="[weight=='3'?'select':'']" @click="changeWeight('3')">40公斤以上</view>
 			</view>
 			<!-- <view class="ygzl-mark" v-if="weight!='3'"> 
 				<view>未满100公斤，不需要添加照片</view>
@@ -108,9 +108,9 @@
 		<view style="border-bottom: solid 1upx #F5F5F5;"></view>
 		<view class="explain">
 			<view class="explain-title">注意事项</view>
-			<view class="explain-content">1、因回收成本原因，社区、写字楼单元楼价格面议</view>
-			<view class="explain-content">2、小于10公斤暂不保证上门回收</view>
-			<view class="explain-content">3、重量超过100公斤，需提供照片供回收员参考</view>
+			<view class="explain-content">1、因回收成本原因，暂不提供校外服务</view>
+			<view class="explain-content">2、小于5公斤暂不保证上门回收</view>
+			<!-- <view class="explain-content">3、</view> -->
 		</view>
 	    <view class="subscribe">
 			<view class="subscribe-view" style="margin-top: 20upx">
@@ -353,6 +353,7 @@ import moment from 'moment'
 				}
 				addHsOrder(JSON.stringify(data)).then(res=>{
 					if(res.returnCode=="0"){
+						console.log(res.returnCode)
 						uni.switchTab({
 							url:"./order"
 						})

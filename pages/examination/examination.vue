@@ -4,7 +4,7 @@
       <view>
         <view class="card">
           <view style="float: left;">
-            <image class="img" src="../../static/images/banner_02.jpg"></image>
+            <image class="img" src="../../static/images/user.jpg"></image>
           </view>
           <view style="float: right;">
             <view class="introduce">排名：2</view>
@@ -87,18 +87,18 @@
       </view>
       <view class="exam_over_btn" v-if="!is_have">
         <!-- #ifdef MP -->
-        <button class="exam_over_btns" @tap="bindImage">
+        <!-- <button class="exam_over_btns" @tap="bindImage">
           <image src="../../static/images/download.png" mode="widthFix"></image>
           保存成绩单
-        </button>
+        </button> -->
         <button @tap="show = true" class="exam_over_btns">
           <image src="../../static/images/restart-line.png" mode="widthFix"></image>
           返回
         </button>
-        <button open-type="share" class="exam_over_btns">
+        <!-- <button open-type="share" class="exam_over_btns">
           <image src="../../static/images/guide_tag.png" mode="widthFix"></image>
           考考别人
-        </button>
+        </button> -->
         <!-- #endif -->
         <!-- #ifndef MP -->
         <button @tap="bindAgain" class="exam_over_btns">

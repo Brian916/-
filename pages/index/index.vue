@@ -32,7 +32,7 @@
       <view class="cu-reclaims">
         <view class="cu-reclaim">
           <image src="/static/images/xunhuan.svg" style="width:60upx;height:60upx;margin:50upx 80upx 4upx;"></image>
-          <view style="color: #FFFFFF;text-align: center;font-size: 36upx;">向我提问</view>
+          <view style="color: #FFFFFF;text-align: center;font-size: 36upx;">分类查询</view>
         </view>
       </view>
     </view>

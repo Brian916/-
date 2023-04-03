@@ -43,7 +43,7 @@ export default {
       userinfo: {},
       orderTypeLise: [
         //name-标题 icon-图标 badge-角标
-        { name: '待办理', icon: 'l1.png' },
+        { name: '待回收', icon: 'l1.png' },
         { name: '已完成', icon: 'l2.png' }
       ],
       severList: [
@@ -72,8 +72,8 @@ export default {
     init() {
       //用户信息
       this.userinfo = {
-        face: '../../static/face.jpeg',
-        username: 'VIP会员10240',
+        face: '../../static/images/user.jpg',
+        username: '微信用户',
         integral: '1435'
       };
     },

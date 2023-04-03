@@ -117,7 +117,7 @@
 				this.model.sex = evt.detail.value;
 			},
 			addUserAddress(){
-				this.model.userId = getApp().globalData.userInfo;
+				this.model.userId = uni.getStorageSync('userId');
 				console.info(this.model.userId)
 				
 			    let data=this.model
