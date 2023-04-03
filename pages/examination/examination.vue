@@ -1,6 +1,6 @@
 <template>
   <view class="contentsu">
-    <view v-show="show">
+    <!-- <view v-show="show">
       <view>
         <view class="card">
           <view style="float: left;">
@@ -42,7 +42,18 @@
             </div>
           </div>
       </view>
-    </uni-popup>
+    </uni-popup> -->
+    <view v-show="show">
+      <image src="../../static/test.jpg" style="width: 100%;"></image>
+      <view class="cu-reclaimss" @click="show = false;is_have = true;index = '01';downLoadQuestion();">
+        <view class="cu-reclaims">
+          <view class="cu-reclaim">
+            <image src="/static/images/xunhuan.svg" style="width:60upx;height:60upx;margin:50upx 80upx 4upx;"></image>
+            <view style="color: #FFFFFF;text-align: center;font-size: 36upx;">开始答题</view>
+          </view>
+        </view>
+      </view>
+    </view>
 
     <view v-show="!show" class="container">
       <view class="exam" v-if="is_have">
@@ -87,18 +98,18 @@
       </view>
       <view class="exam_over_btn" v-if="!is_have">
         <!-- #ifdef MP -->
-        <!-- <button class="exam_over_btns" @tap="bindImage">
+        <button class="exam_over_btns" @tap="bindImage">
           <image src="../../static/images/download.png" mode="widthFix"></image>
           保存成绩单
-        </button> -->
+        </button>
         <button @tap="show = true" class="exam_over_btns">
           <image src="../../static/images/restart-line.png" mode="widthFix"></image>
           返回
         </button>
-        <!-- <button open-type="share" class="exam_over_btns">
+        <button open-type="share" class="exam_over_btns">
           <image src="../../static/images/guide_tag.png" mode="widthFix"></image>
           考考别人
-        </button> -->
+        </button>
         <!-- #endif -->
         <!-- #ifndef MP -->
         <button @tap="bindAgain" class="exam_over_btns">
@@ -156,7 +167,7 @@ export default {
     // 		this.downLoadQuestion();
     // 	}
     // } else {
-    this.downLoadQuestion();
+    // this.downLoadQuestion();
     // }
   },
   // onShareAppMessage(res) {
@@ -609,5 +620,47 @@ page {
 }
 .score {
   font-weight: bold;
+}
+.cu-reclaimss {
+  background-color: rgba(50, 186, 120, 0.3);
+  height: 360upx;
+  width: 360upx;
+  margin: 0 auto;
+  border-radius: 180upx 180upx 180upx 180upx;
+  position: relative;
+  animation: one-reclaim 0.6s infinite linear;
+  animation-direction: alternate;
+}
+
+@keyframes one-reclaim {
+  0% {
+    opacity: 0;
+    transform: scale(0.5);
+  }
+
+  100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+.cu-reclaim {
+  height: 220upx;
+  width: 220upx;
+  border-radius: 110upx 110upx 110upx 110upx;
+  background-color: rgba(50, 186, 120, 1);
+  position: absolute;
+  top: 20upx;
+  left: 20upx;
+}
+
+.cu-reclaims {
+  background-color: rgba(50, 186, 120, 0.5);
+  height: 260upx;
+  width: 260upx;
+  border-radius: 130upx 130upx 130upx 130upx;
+  position: absolute;
+  top: 50upx;
+  left: 50upx;
 }
 </style>
