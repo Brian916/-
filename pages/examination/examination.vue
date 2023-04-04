@@ -98,10 +98,10 @@
       </view>
       <view class="exam_over_btn" v-if="!is_have">
         <!-- #ifdef MP -->
-        <button class="exam_over_btns" @tap="bindImage">
+        <!-- <button class="exam_over_btns" @tap="bindImage">
           <image src="../../static/images/download.png" mode="widthFix"></image>
           保存成绩单
-        </button>
+        </button> -->
         <button @tap="show = true" class="exam_over_btns">
           <image src="../../static/images/restart-line.png" mode="widthFix"></image>
           返回
@@ -144,19 +144,19 @@ export default {
       fenlei_detail: [
         {
           id: '1',
-          name: '其他垃圾'
-        },
-        {
-          id: '2',
-          name: '餐厨垃圾'
-        },
-        {
-          id: '3',
           name: '可回收物'
         },
         {
-          id: '4',
+          id: '2',
+          name: '厨余垃圾'
+        },
+        {
+          id: '3',
           name: '有害垃圾'
+        },
+        {
+          id: '4',
+          name: '其他垃圾'
         }
       ]
     };
@@ -202,7 +202,7 @@ export default {
           is_show: false,
           is_type: '',
           name: '修正液',
-          type: 1
+          type: 4
         },
         {
           id: 3,
@@ -237,21 +237,21 @@ export default {
           is_show: false,
           is_type: '',
           name: '塑料袋',
-          type: 1
+          type: 4
         },
         {
           id: 8,
           is_show: false,
           is_type: '',
           name: '烟蒂',
-          type: 1
+          type: 4
         },
         {
           id: 9,
           is_show: false,
           is_type: '',
           name: '剩饭',
-          type: 1
+          type: 2
         },
         {
           id: 10,

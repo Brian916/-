@@ -1,7 +1,7 @@
 //现网正式环境
 // const BASEURL = "http://lonely.icu:8080"
 // const BASEURL = "http://47.120.7.6"
-const BASEURL = "http://172.20.10.2"
+const BASEURL = "http://192.168.15.128"
 const BASEURLImg = "http://www.mazsn.cn"
 
 /**
