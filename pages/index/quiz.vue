@@ -1,7 +1,7 @@
 <template>
   <view>
     <uni-section title="自定义icon" type="line" :radius="100">
-      <uni-search-bar placeholder="自定义" @confirm.stop="search" bgColor="#EEEEEE" @cancel="search" cancel-text="搜索">
+      <uni-search-bar placeholder="自定义" @confirm.stop="search" bgColor="#EEEEEE" @cancel="search" cancel-text="搜索" v-model="seek">
         <uni-icons slot="searchIcon" color="#999999" size="18" type="camera" @click.stop="photograph" />
       </uni-search-bar>
     </uni-section>
@@ -54,6 +54,7 @@ export default {
   data() {
     return {
       type: ['可回收垃圾', '有害垃圾', '厨余垃圾', '其他垃圾'],
+      seek: '',
       list: {
         img:'http://tmp/YDtPd6MrgUnF8c09d031c48d8d9714e8e32de07021db.jpg'
       },
@@ -83,6 +84,12 @@ export default {
             this.list = res.data.result.list[0];
             this.show = true;
           } else {
+            uni.showToast({
+              title: '没有查询到，请换一个物品查询试试',
+              duration: 1500,
+              mask: false,
+              icon: 'none'
+            });
             this.show = false;
           }
         }
@@ -112,6 +119,14 @@ export default {
               var ress = JSON.parse(res.data);
               if (+ress.returnCode === 1) {
                 img({ imgUrl: ress.result }).then(res => {
+                  if(!res.rubbish && !res.category){
+                    uni.showToast({
+                      title: '没有查询到，请换一个物品查询试试',
+                      duration: 1500,
+                      mask: false,
+                      icon: 'none'
+                    });
+                  }
                   that.list = {
                     ...that.list,
                     ...res
