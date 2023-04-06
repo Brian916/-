@@ -357,6 +357,8 @@ import moment from 'moment'
 						uni.switchTab({
 							url:"./order"
 						})
+					}else{
+					    this.$api.msg("下单失败，请重试");
 					}
 				})
 			},
